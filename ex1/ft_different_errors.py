@@ -4,35 +4,40 @@ def garden_operations(error_type: str) -> None:
         try:
             int("talal")
         except ValueError as e:
-            raise ValueError("Caught ValueError: invalid literal for int()") from e
+            raise ValueError(
+                "Caught ValueError: invalid literal for int()"
+                ) from e
 
     elif error_type == "ZeroDivisionError":
         try:
             1 / 0
         except ZeroDivisionError as e:
-            raise ZeroDivisionError("Caught ZeroDivisionError: division by zero") from e
+            raise ZeroDivisionError(
+                "Caught ZeroDivisionError: division by zero"
+                ) from e
 
     elif error_type == "FileNotFoundError":
         try:
             f = open("missing.txt", "r")
             f.close()
         except FileNotFoundError as e:
-            raise FileNotFoundError(f"Caught FileNotFoundError: No such file '{e.filename}'") from e
+            raise FileNotFoundError(
+                f"Caught FileNotFoundError: No such file '{e.filename}'"
+                ) from e
 
     elif error_type == "KeyError":
         try:
             dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
-            value: str = dictionary["missing\_plant"]
+            dictionary["missing_plant"]
         except KeyError as e:
             raise KeyError(f"Caught KeyError: '{e.args[0]}'") from e
-        
+
     elif error_type == "multiple":
         try:
-            dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
-            value: str = dictionary["country"]
-        except (ZeroDivisionError, ValueError, Exception) as e:
+            dictionary = {"name": "TALAL"}
+            dictionary["country"]
+        except (ZeroDivisionError, ValueError, KeyError) as e:
             raise Exception("Caught an error, but program continues!") from e
-
 
 
 def test_error_types() -> None:
@@ -64,7 +69,7 @@ def test_error_types() -> None:
         print("Testing KeyError...")
         garden_operations("KeyError")
     except KeyError as e:
-        print(str(e.args[0]))
+        print(e.args[0] if e.args else str(e))
 
     print("")
     try:
