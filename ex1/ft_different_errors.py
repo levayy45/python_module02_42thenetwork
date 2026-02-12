@@ -17,19 +17,27 @@ def garden_operations(error_type: str) -> None:
             f = open("missing.txt", "r")
             f.close()
         except FileNotFoundError as e:
-            raise FileNotFoundError("Caught FileNotFoundError: No such file 'missing.txt'") from e
+            raise FileNotFoundError(f"Caught FileNotFoundError: No such file '{e.filename}'") from e
 
     elif error_type == "KeyError":
         try:
             dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
-            value: str = dictionary["country"]
+            value: str = dictionary["missing\_plant"]
         except KeyError as e:
-            raise KeyError("Caught KeyError: 'missing\_plant'") from e
+            raise KeyError(f"Caught KeyError: '{e.args[0]}'") from e
+        
+    elif error_type == "multiple":
+        try:
+            dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
+            value: str = dictionary["country"]
+        except (ZeroDivisionError, ValueError, Exception) as e:
+            raise Exception("Caught an error, but program continues!") from e
+
 
 
 def test_error_types() -> None:
 
-    print("=== Garden Error Types Demo ===")
+    print("=== Garden Error Types Demo ===\n")
 
     try:
         print("Testing ValueError...")
@@ -37,21 +45,36 @@ def test_error_types() -> None:
     except ValueError as e:
         print(e)
 
+    print("")
     try:
         print("Testing ZeroDivisionError...")
         garden_operations("ZeroDivisionError")
     except ZeroDivisionError as e:
         print(e)
 
+    print("")
     try:
         print("Testing FileNotFoundError...")
         garden_operations("FileNotFoundError")
     except FileNotFoundError as e:
         print(e)
 
+    print("")
     try:
         print("Testing KeyError...")
         garden_operations("KeyError")
-    except FileNotFoundError as e:
+    except KeyError as e:
+        print(str(e.args[0]))
+
+    print("")
+    try:
+        print("Testing multiple errors together...")
+        garden_operations("multiple")
+    except Exception as e:
         print(e)
 
+    print("\nAll error types tested successfully!")
+
+
+if __name__ == "__main__":
+    test_error_types()
