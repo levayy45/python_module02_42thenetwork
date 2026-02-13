@@ -1,22 +1,29 @@
 class GardenError(Exception):
     pass
 
+
 class PlantError(GardenError):
     pass
 
+
 class WaterError(GardenError):
     pass
+
 
 def check_for_error(error_type: str, valide: int) -> None:
     plant_name = "tomato"
     if error_type == "PlantError":
         if valide == 1:
-            raise PlantError(f"Caught {PlantError.__name__}: The {plant_name} plant is wilting!")
+            raise PlantError(
+                f"Caught {PlantError.__name__}: "
+                f"The {plant_name} plant is wilting!")
         else:
             raise PlantError(f"The {plant_name} plant is wilting!")
     elif error_type == "WaterError":
         if valide == 1:
-            raise WaterError(f"Caught {WaterError.__name__}: Not enough water in the tank!")
+            raise WaterError(
+                f"Caught {WaterError.__name__}: "
+                f"Not enough water in the tank!")
         else:
             raise WaterError("Not enough water in the tank!")
 
@@ -46,7 +53,7 @@ def test_error_types() -> None:
             check_for_error(err, 0)
         except GardenError as e:
             print(e)
-    
+
     print("\nAll custom error types work correctly!")
 
 
