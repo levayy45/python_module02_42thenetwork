@@ -40,10 +40,10 @@ def test_error_types() -> None:
     print("")
     print("Testing catching all garden errors...")
     my_list = ("PlantError", "WaterError")
-    for i in my_list:
+    for err in my_list:
         try:
             print("Caught a garden error: ", end="")
-            check_for_error(i, 0)
+            check_for_error(err, 0)
         except GardenError as e:
             print(e)
     
