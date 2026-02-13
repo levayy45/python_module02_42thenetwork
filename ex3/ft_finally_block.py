@@ -2,7 +2,7 @@ class PlantError(Exception):
     pass
 
 
-def water_plants(plant_list: list) -> None:
+def water_plants(plant_list: list[str]) -> None:
     print("Opening watering system")
     for plant in plant_list:
         if plant == "imposter":
