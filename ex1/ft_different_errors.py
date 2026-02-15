@@ -69,7 +69,7 @@ def test_error_types() -> None:
         print("Testing KeyError...")
         garden_operations("KeyError")
     except KeyError as e:
-        print(e.args[0] if e.args else str(e))
+        print(e.args[0])
 
     print("")
     try:
