@@ -1,6 +1,8 @@
 def check_plant_health(
     plant_name: str, water_level: int, sunlight_hours: int
         ) -> str:
+    if plant_name is None:
+        raise ValueError("Cannot water None - invalid plant!")
     if plant_name == "":
         raise ValueError("Error: Plant name cannot be empty!")
     if not (1 <= water_level <= 10):
@@ -62,4 +64,7 @@ def test_plant_checks() -> None:
 
 
 if __name__ == "__main__":
-    test_plant_checks()
+    try:
+        test_plant_checks()
+    except Exception as e:
+        print("Error: ", e)
