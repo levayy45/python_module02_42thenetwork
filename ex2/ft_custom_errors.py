@@ -10,52 +10,38 @@ class WaterError(GardenError):
     pass
 
 
-def check_for_error(error_type: str, valide: int) -> None:
-    plant_name = "tomato"
-    if error_type == "PlantError":
-        if valide == 1:
-            raise PlantError(
-                f"Caught {PlantError.__name__}: "
-                f"The {plant_name} plant is wilting!")
-        else:
-            raise PlantError(f"The {plant_name} plant is wilting!")
-    elif error_type == "WaterError":
-        if valide == 1:
-            raise WaterError(
-                f"Caught {WaterError.__name__}: "
-                f"Not enough water in the tank!")
-        else:
-            raise WaterError("Not enough water in the tank!")
-
-
 def test_error_types() -> None:
     print("=== Custom Garden Errors Demo ===\n")
 
+    plant_name = "tomato"
+    print("Testing PlantError...")
     try:
-        print(f"Testing {PlantError.__name__}...")
-        check_for_error("PlantError", 1)
+        raise PlantError(f"The {plant_name} plant is wilting!")
     except PlantError as e:
-        print(e)
+        print(f"Caught {PlantError.__name__}: {e}")
 
-    print("")
+    print("\nTesting WaterError...")
     try:
-        print(f"Testing {WaterError.__name__}...")
-        check_for_error("WaterError", 1)
+        raise WaterError("Not enough water in the tank!")
     except WaterError as e:
-        print(e)
+        print(f"Caught {WaterError.__name__}: {e}")
 
-    print("")
-    print("Testing catching all garden errors...")
-    my_list = ("PlantError", "WaterError")
-    for err in my_list:
+    print("\nTesting catching all garden errors...")
+    errors = [
+        PlantError(f"The {plant_name} plant is wilting!"),
+        WaterError("Not enough water in the tank!")
+    ]
+    for err in errors:
         try:
-            print("Caught a garden error: ", end="")
-            check_for_error(err, 0)
+            raise err
         except GardenError as e:
-            print(e)
+            print(f"Caught a garden error: {e}")
 
     print("\nAll custom error types work correctly!")
 
 
 if __name__ == "__main__":
-    test_error_types()
+    try:
+        test_error_types()
+    except Exception as e:
+        print("Error: ", e)
