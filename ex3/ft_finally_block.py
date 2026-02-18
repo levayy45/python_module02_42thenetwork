@@ -3,14 +3,21 @@ class PlantError(Exception):
 
 
 def water_plants(plant_list: list[str]) -> None:
-    print("Opening watering system")
-    for plant in plant_list:
-        if plant is None:
-            raise PlantError("Error: Cannot water None - invalid plant!")
-        if plant == "":
-            raise PlantError("Error: Cannot water empty - invalid plant!")
-        else:
-            print(f"Watering {plant}")
+    try:
+        print("Opening watering system")
+        for plant in plant_list:
+            if plant is None:
+                raise PlantError("Error: Cannot water None - invalid plant!")
+            if plant == "":
+                raise PlantError("Error: Cannot water empty - invalid plant!")
+            else:
+                print(f"Watering {plant}")
+    except PlantError as e:
+        print(e)
+        return
+    finally:
+        print("Closing watering system (cleanup)")
+    print("Watering completed successfully!")
 
 
 def test_watering_system() -> None:
@@ -18,30 +25,12 @@ def test_watering_system() -> None:
 
     print("Testing normal watering...")
     normal_list = ["tomato", "lettuce", "carrots"]
-    success: bool = False
-    try:
-        water_plants(normal_list)
-        success = True
-    except PlantError as e:
-        print(e)
-    finally:
-        print("Closing watering system (cleanup)")
-    if success:
-        print("Watering completed successsfully!")
+    water_plants(normal_list)
 
-    success = False
     print("")
     print("Testing with error...")
     err_list = ["tomato", None, "carrots"]
-    try:
-        water_plants(err_list)
-        success = True
-    except PlantError as e:
-        print(e)
-    finally:
-        print("Closing watering system (cleanup)")
-    if success:
-        print("Watering completed successsfully!")
+    water_plants(err_list)
 
     print("\nCleanup always happens, even with errors!")
 
