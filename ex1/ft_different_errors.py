@@ -27,7 +27,7 @@ def garden_operations() -> None:
         dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
         dictionary["missing\\_plant"]
     except KeyError as e:
-        print(f"Caught KeyError: '{e}'")
+        print(f"Caught KeyError: '{e.args[0]}'")
 
 
 def test_error_types() -> None:
