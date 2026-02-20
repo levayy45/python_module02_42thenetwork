@@ -20,12 +20,12 @@ class GardenManager:
         self.water_tank = water_tank
 
     def add_plant(
-            self, plant_name: str, water_level: int, sunlight_hours: int
-            ) -> None:
+        self, plant_name: str, water_level: int, sunlight_hours: int
+    ) -> None:
         if plant_name is None:
-            raise PlantError("Error: Plant name cannot be None!")
+            raise PlantError("Error adding plant: Plant name cannot be None!")
         if plant_name == "":
-            raise PlantError("Error: Plant name cannot be empty!")
+            raise PlantError("Error adding plant: Plant name cannot be empty!")
         self.plants[plant_name] = {"water": water_level, "sun": sunlight_hours}
         print(f"Added {plant_name} successfully")
 
@@ -46,27 +46,24 @@ class GardenManager:
                 raise WaterError(
                     f"Error checking {plant_name}: Water level "
                     f"{water} is too high (max 10)"
-                    )
+                )
             else:
                 raise WaterError(
                     f"Error checking {plant_name}: Water level "
                     f"{water} is too low (min 1)"
-                    )
+                )
         if not (2 <= sun <= 12):
             if sun > 12:
                 raise SunlightError(
                     f"Error checking {plant_name}: sunlight hours "
                     f"{sun} is too high (max 12)"
-                    )
+                )
             else:
                 raise SunlightError(
                     f"Error checking {plant_name}: sunlight hours "
                     f"{sun} is too low (min 2)"
-                    )
-        return (
-            f"{plant_name}: healthy (water: {water}"
-            f", sun: {sun})"
-        )
+                )
+        return f"{plant_name}: healthy (water: {water}" f", sun: {sun})"
 
     def check_plant_water_tank(self) -> str:
         if self.water_tank < 30:
@@ -80,7 +77,7 @@ def test_garden_management() -> None:
     dict_plant = {
         "plant0": {"name": "tomato", "water": 5, "sun": 8},
         "plant1": {"name": "lettuce", "water": 15, "sun": 8},
-        "plant2": {"name": "", "water": 6, "sun": 8}
+        "plant2": {"name": "", "water": 6, "sun": 8},
     }
     water_tank_level = 20
     manager = GardenManager(water_tank_level)
@@ -90,7 +87,8 @@ def test_garden_management() -> None:
         try:
             plant_data = dict_plant[plant_key]
             manager.add_plant(
-                plant_data["name"], plant_data["water"], plant_data["sun"])
+                plant_data["name"], plant_data["water"], plant_data["sun"]
+            )
         except PlantError as e:
             print(e)
 

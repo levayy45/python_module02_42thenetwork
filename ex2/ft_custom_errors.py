@@ -29,7 +29,7 @@ def test_error_types() -> None:
     print("\nTesting catching all garden errors...")
     errors = [
         PlantError(f"The {plant_name} plant is wilting!"),
-        WaterError("Not enough water in the tank!")
+        WaterError("Not enough water in the tank!"),
     ]
     for err in errors:
         try:
