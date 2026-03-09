@@ -21,7 +21,7 @@ def test_temperature_input() -> None:
 
     print("=== Garden Temperature Checker ===\n")
 
-    test = ["25", "abc", "100", "-50"]
+    test = ["25", 'abc', "100", "-50"]
 
     for i in test:
         print(f"Testing temperature: {i}")
@@ -30,13 +30,12 @@ def test_temperature_input() -> None:
             print(f"Temperature {valid_temp}°C is perfect for plants!")
         except ValueError as e:
             print(e)
+        except Exception as e:
+            print(f"Error: {e}")
         print("")
 
     print("All tests completed - program didn't crash!")
 
 
 if __name__ == "__main__":
-    try:
-        test_temperature_input()
-    except Exception as e:
-        print("Error: ", e)
+    test_temperature_input()
