@@ -12,7 +12,6 @@ def garden_operations(string: str) -> None:
     elif string == "KeyError":
         dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
         dictionary["missing\\_plant"]
-
     elif string == "multiple":
         dictionary = {"name": "TALAL"}
         dictionary["country"]
