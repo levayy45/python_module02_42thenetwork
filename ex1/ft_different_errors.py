@@ -1,47 +1,61 @@
-def garden_operations() -> None:
-
-    try:
-        print("Testing ValueError...")
+def garden_operations(string: str) -> None:
+    if string == "ValueError":
         int("talal")
-    except ValueError:
-        print("Caught ValueError: invalid literal for int()")
 
-    print("")
-    try:
-        print("Testing ZeroDivisionError...")
+    elif string == "ZeroDivisionError":
         1 / 0
-    except ZeroDivisionError as e:
-        print(f"Caught ZeroDivisionError: {e}")
 
-    print("")
-    try:
-        print("Testing FileNotFoundError...")
+    elif string == "FileNotFoundError":
         f = open("missing.txt", "r")
         f.close()
-    except FileNotFoundError as e:
-        print(f"Caught FileNotFoundError: No such file '{e.filename}'")
 
-    print("")
-    try:
-        print("Testing KeyError...")
+    elif string == "KeyError":
         dictionary = {"name": "TALAL", "job": "UNEMPLOYED"}
         dictionary["missing\\_plant"]
-    except KeyError as e:
-        print(f"Caught KeyError: '{e.args[0]}'")
+
+    elif string == "multiple":
+        dictionary = {"name": "TALAL"}
+        dictionary["country"]
+        1 / 0
+        int("talal")
+        f = open("missing.txt", "r")
+        f.close()
 
 
 def test_error_types() -> None:
     print("=== Garden Error Types Demo ===\n")
 
-    garden_operations()
+    try:
+        print("Testing ValueError...")
+        garden_operations("ValueError")
+    except ValueError:
+        print("Caught ValueError: invalid literal for int()")
+    print()
 
-    print("")
+    try:
+        print("Testing ZeroDivisionError...")
+        garden_operations("ZeroDivisionError")
+    except ZeroDivisionError as e:
+        print(f"Caught ZeroDivisionError: {e}")
+    print()
+
+    try:
+        print("Testing FileNotFoundError...")
+        garden_operations("FileNotFoundError")
+    except FileNotFoundError as e:
+        print(f"Caught FileNotFoundError: No such file '{e.filename}'")
+    print()
+
+    try:
+        print("Testing KeyError...")
+        garden_operations("KeyError")
+    except KeyError as e:
+        print(f"Caught KeyError: '{e.args[0]}'")
+    print()
+
     try:
         print("Testing multiple errors together...")
-        dictionary = {"name": "TALAL"}
-        dictionary["country"]
-        1 / 0
-        int("talal")
+        garden_operations("multiple")
     except (ValueError, ZeroDivisionError, KeyError, FileNotFoundError):
         print("Caught an error, but program continues!")
 
